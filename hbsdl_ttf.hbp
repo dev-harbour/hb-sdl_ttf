@@ -1,0 +1,31 @@
+# Project build file
+
+-hblib
+-inc
+
+-olib/${hb_plat}/${hb_comp}/${hb_name}
+
+-w3 -es2 -gc3
+
+-depurlbase=SDL:https://github.com/libsdl-org/SDL_ttf
+-depkeyhead=SDL:SDL2/SDL_ttf.h
+-depcontrol=SDL:${HB_WITH_SDL_TTF}
+-depincpath=SDL:/usr/include/SDL2
+-depincpath=SDL:/usr/local/include/SDL2
+-depincpath=SDL:/opt/local/include/SDL2
+-depincpath=SDL:/usr/local/opt/SDL2/include
+-depimplibs=SDL:../bin/SDL2_ttf.dll
+-depimplibs=SDL:../lib/libSDL2_ttf.so
+-depimplibs=SDL:../lib/libSDL2_ttf.a
+-depimplibd=SDL:SDL
+-depfinish=SDL
+
+-iinclude
+
+-hbx=include/${hb_name}.hbx
+
+src/*.c
+src/*.prg
+
+$hb_pkg_dynlib.hbm
+$hb_pkg_install.hbm
