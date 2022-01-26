@@ -192,8 +192,8 @@ HB_FUNC( TTF_QUIT )
 {
 	TTF_Quit();
 }
-// extern DECLSPEC int SDLCALL TTF_WasInit(void);
 
+// extern DECLSPEC int SDLCALL TTF_WasInit(void);
 HB_FUNC( TTF_WASINIT )
 {
 	hb_retni( TTF_WasInit() );
