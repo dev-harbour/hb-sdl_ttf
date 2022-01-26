@@ -6,6 +6,16 @@
 
 # Changelog hb-sdl_ttf
 
+## 2022-01-26
+
+### Added
+
+   - hb-sdl_ttf/examples/fonts/LinLibertine_R.ttf
+   - hb-sdl_ttf/examples/fonts/README.md
+
+### Fixed
+
+   - hb-sdl_ttf/src/SDL_ttf.c
 
 ## 2022-01-21
 
