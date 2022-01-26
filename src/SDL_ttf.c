@@ -188,7 +188,17 @@ HB_FUNC( TTF_CLOSEFONT )
 }
 
 // extern DECLSPEC void SDLCALL TTF_Quit(void);
+HB_FUNC( TTF_QUIT )
+{
+	TTF_Quit();
+}
 // extern DECLSPEC int SDLCALL TTF_WasInit(void);
+
+HB_FUNC( TTF_WASINIT )
+{
+	hb_retni( TTF_WasInit() );
+}
+
 // extern DECLSPEC int TTF_GetFontKerningSize(TTF_Font *font, int prev_index, int index) SDL_DEPRECATED;
 // extern DECLSPEC int TTF_GetFontKerningSizeGlyphs(TTF_Font *font, Uint16 previous_ch, Uint16 ch);
 // extern DECLSPEC int TTF_GetFontKerningSizeGlyphs32(TTF_Font *font, Uint32 previous_ch, Uint32 ch);

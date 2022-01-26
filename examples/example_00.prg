@@ -70,6 +70,7 @@ PROCEDURE Main()
 
    SDL_DestroyTexture( pTextureText )
    TTF_CloseFont( pOpenFont )
+   TTF_Quit()
    SDL_DestroyRenderer( pRenderer )
    SDL_DestroyWindow( pWindow )
    SDL_Quit()
