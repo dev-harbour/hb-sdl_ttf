@@ -61,8 +61,37 @@ void hb_font_Return( TTF_Font * pFont )
 }
 
 // extern DECLSPEC const SDL_version * SDLCALL TTF_Linked_Version(void);
+
 // extern DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch);
+HB_FUNC( TTF_GETFREETYPEVERSION )
+{
+   if( hb_param( 1, HB_IT_BYREF ) != NULL && hb_param( 2, HB_IT_BYREF ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL )
+   {
+      int major;
+      int minor;
+      int patch;
+      TTF_GetFreeTypeVersion( &major, &minor, &patch );
+      hb_stornint( major, 1 );
+      hb_stornint( minor, 2 );
+      hb_stornint( patch, 3 );
+   }
+}
+
 // extern DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch);
+HB_FUNC( TTF_GETHARFBUZZVERSION )
+{
+   if( hb_param( 1, HB_IT_BYREF ) != NULL && hb_param( 2, HB_IT_BYREF ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL )
+   {
+      int major;
+      int minor;
+      int patch;
+      TTF_GetHarfBuzzVersion( &major, &minor, &patch );
+      hb_stornint( major, 1 );
+      hb_stornint( minor, 2 );
+      hb_stornint( patch, 3 );
+   }
+}
+
 // extern DECLSPEC void SDLCALL TTF_ByteSwappedUNICODE(SDL_bool swapped);
 
 // extern DECLSPEC int SDLCALL TTF_Init(void);
@@ -86,10 +115,26 @@ HB_FUNC( TTF_OPENFONT )
 }
 
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndex(const char *file, int ptsize, long index);
+HB_FUNC( TTF_OPENFONTINDEX )
+{
+   if( hb_param( 1, HB_IT_STRING ) != NULL &&
+       hb_param( 2, HB_IT_INTEGER ) != NULL &&
+       hb_param( 3, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontIndex( hb_parc( 1 ), hb_parni( 2 ), ( long ) hb_parni(3) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontRW(SDL_RWops *src, int freesrc, int ptsize);
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexRW(SDL_RWops *src, int freesrc, int ptsize, long index);
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontDPI(const char *file, int ptsize, unsigned int hdpi, unsigned int vdpi);
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexDPI(const char *file, int ptsize, long index, unsigned int hdpi, unsigned int vdpi);
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontDPIRW(SDL_RWops *src, int freesrc, int ptsize, unsigned int hdpi, unsigned int vdpi);
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexDPIRW(SDL_RWops *src, int freesrc, int ptsize, long index, unsigned int hdpi, unsigned int vdpi);
 
@@ -115,7 +160,7 @@ HB_FUNC( TTF_SETFONTSIZEDPI )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_INTEGER ) != NULL && hb_param( 4, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontSizeDPI( font, hb_parni( 2 ), hb_parni( 3 ), hb_parni( 4 ) );
+      TTF_SetFontSizeDPI( font, hb_parni( 2 ), hb_parni ( 3 ), hb_parni( 4 ) );
    }
    else
    {
@@ -292,10 +337,9 @@ HB_FUNC( TTF_GETFONTKERNING )
 HB_FUNC( TTF_SETFONTKERNING )
 {
    TTF_Font * font = hb_font_Param( 1 );
-
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      int kerning = hb_parni( 2 );
+      int kerning = hb_parni(2);
       if( kerning == 0 || kerning == 1 )
       {
          TTF_SetFontKerning( font, kerning );
@@ -374,7 +418,7 @@ HB_FUNC( TTF_GLYPHISPROVIDED )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      hb_retni( TTF_GlyphIsProvided(font, ( Uint16 ) hb_parni( 2 ) ) );
+      hb_retni( TTF_GlyphIsProvided( font, ( Uint16 ) hb_parni (2 ) ) );
    }
    else
    {
@@ -398,7 +442,67 @@ HB_FUNC( TTF_GLYPHISPROVIDED32 )
 }
 
 // extern DECLSPEC int SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance);
+HB_FUNC( TTF_GLYPHMETRICS )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL && hb_param( 4, HB_IT_BYREF ) != NULL && hb_param( 5, HB_IT_BYREF ) != NULL && hb_param( 6, HB_IT_BYREF ) != NULL && hb_param( 7, HB_IT_BYREF ) != NULL )
+   {
+      int minx;
+      int maxx;
+      int miny;
+      int maxy;
+      int advance = 0;
+      if ( TTF_GlyphMetrics( font, ( Uint16 ) hb_parni( 1 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
+      {
+         hb_stornint( minx, 3 );
+         hb_stornint( maxx, 4 );
+         hb_stornint( miny, 5 );
+         hb_stornint( maxy, 6 );
+         hb_stornint( advance, 7 );
+      }
+      else
+      {
+         HB_ERR_ARGS();
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance);
+HB_FUNC( TTF_GLYPHMETRICS32 )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL && hb_param( 4, HB_IT_BYREF ) != NULL && hb_param( 5, HB_IT_BYREF ) != NULL && hb_param( 6, HB_IT_BYREF ) != NULL && hb_param( 7, HB_IT_BYREF ) != NULL )
+   {
+      int minx;
+      int maxx;
+      int miny;
+      int maxy;
+      int advance = 0;
+      if ( TTF_GlyphMetrics32( font, ( Uint16 ) hb_parni( 1 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
+      {
+         hb_stornint( minx, 3 );
+         hb_stornint( maxx, 4 );
+         hb_stornint( miny, 5 );
+         hb_stornint( maxy, 6 );
+         hb_stornint( advance, 7 );
+      }
+      else
+      {
+         HB_ERR_ARGS();
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h);
 // extern DECLSPEC int SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h);
 // extern DECLSPEC int SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h);

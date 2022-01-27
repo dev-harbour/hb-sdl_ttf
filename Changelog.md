@@ -1,6 +1,6 @@
 [//]: # ( All notable changes to this project will be documented in this file. )
 [//]: # ( Encoding: UTF-8 No BOM )
-[//]: # ( ## 2022-01-21   ### Changed   ### Fixed   ### Added   ### Removed   ### Update )
+[//]: # ( ## 2022-01-21   ### Changed   ### Fixed   ### Added   ### Removed )
 [//]: # ( Entries may not always be in chronological/commit order. )
 [//]: # ( Others according to Markdown specifications. )
 
@@ -9,13 +9,21 @@
 ## 2022-01-27
 
 ### Update
+   - hb-sdl_ttf/src/SDL_ttf.c
 
-      - hb-sdl_ttf/src/SDL_ttf.c
+### Changed
+   - TTF_GetFreeTypeVersion()
+   - TTF_GetHarfBuzzVersion()
+   - TTF_OpenFontIndex()
+   - TTF_GlyphMetrics()
+   - TTF_GlyphMetrics32()
 
 ## 2022-01-26
 
-### Changed
+### Update
+   - hb-sdl_ttf/src/SDL_ttf.c
 
+### Changed
    - TTF_SetFontSizeDPI()
    - TTF_FontAscent()
    - TTF_FontDescent()
