@@ -100,7 +100,7 @@ HB_FUNC( TTF_SETFONTSIZE )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontSize(font, hb_parni(2) );
+      TTF_SetFontSize( font, hb_parni( 2 ) );
    }
    else
    {
@@ -115,7 +115,7 @@ HB_FUNC( TTF_SETFONTSIZEDPI )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_INTEGER ) != NULL && hb_param( 4, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontSizeDPI(font, hb_parni(2), hb_parni(3), hb_parni(4) );
+      TTF_SetFontSizeDPI( font, hb_parni( 2 ), hb_parni( 3 ), hb_parni( 4 ) );
    }
    else
    {
@@ -145,7 +145,7 @@ HB_FUNC( TTF_SETFONTSTYLE )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontStyle( font, hb_parni(2) );
+      TTF_SetFontStyle( font, hb_parni( 2 ) );
    }
    else
    {
@@ -160,7 +160,7 @@ HB_FUNC( TTF_GETFONTOUTLINE )
 
    if( font )
    {
-      hb_retni( TTF_GetFontOutline(font) );
+      hb_retni( TTF_GetFontOutline( font ) );
    }
    else
    {
@@ -175,7 +175,7 @@ HB_FUNC( TTF_SETFONTOUTLINE )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontOutline( font, hb_parni(2) );
+      TTF_SetFontOutline( font, hb_parni( 2 ) );
    }
    else
    {
@@ -190,7 +190,7 @@ HB_FUNC( TTF_GETFONTHINTING )
 
    if( font )
    {
-      hb_retni( TTF_GetFontHinting(font) );
+      hb_retni( TTF_GetFontHinting( font ) );
    }
    else
    {
@@ -205,7 +205,7 @@ HB_FUNC( TTF_SETFONTHINTING )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontHinting( font, hb_parni(2) );
+      TTF_SetFontHinting( font, hb_parni( 2 ) );
    }
    else
    {
@@ -220,7 +220,7 @@ HB_FUNC( TTF_FONTHEIGHT )
 
    if( font )
    {
-      hb_retni( TTF_FontHeight(font) );
+      hb_retni( TTF_FontHeight( font ) );
    }
    else
    {
@@ -235,7 +235,7 @@ HB_FUNC( TTF_FONTASCENT )
 
    if( font )
    {
-      hb_retni( TTF_FontAscent(font) );
+      hb_retni( TTF_FontAscent( font ) );
    }
    else
    {
@@ -250,7 +250,7 @@ HB_FUNC( TTF_FONTDESCENT )
 
    if( font )
    {
-      hb_retni( TTF_FontDescent(font) );
+      hb_retni( TTF_FontDescent( font ) );
    }
    else
    {
@@ -265,7 +265,7 @@ HB_FUNC( TTF_FONTLINESKIP )
 
    if( font )
    {
-      hb_retni( TTF_FontLineSkip(font) );
+      hb_retni( TTF_FontLineSkip( font ) );
    }
    else
    {
@@ -280,7 +280,7 @@ HB_FUNC( TTF_GETFONTKERNING )
 
    if( font )
    {
-      hb_retni( TTF_GetFontKerning(font) );
+      hb_retni( TTF_GetFontKerning( font ) );
    }
    else
    {
@@ -292,10 +292,11 @@ HB_FUNC( TTF_GETFONTKERNING )
 HB_FUNC( TTF_SETFONTKERNING )
 {
    TTF_Font * font = hb_font_Param( 1 );
+
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      int kerning = hb_parni(2);
-      if (kerning == 0 || kerning == 1)
+      int kerning = hb_parni( 2 );
+      if( kerning == 0 || kerning == 1 )
       {
          TTF_SetFontKerning( font, kerning );
       }
@@ -313,7 +314,7 @@ HB_FUNC( TTF_FONTFACES )
 
    if( font )
    {
-      hb_retnl( TTF_FontFaces(font) );
+      hb_retnl( TTF_FontFaces( font ) );
    }
    else
    {
@@ -328,7 +329,7 @@ HB_FUNC( TTF_FONTFACEISFIXEDWIDTH )
 
    if( font )
    {
-      hb_retni( TTF_FontFaceIsFixedWidth(font) );
+      hb_retni( TTF_FontFaceIsFixedWidth( font ) );
    }
    else
    {
@@ -343,7 +344,7 @@ HB_FUNC( TTF_FONTFACEFAMILYNAME )
 
    if( font )
    {
-      hb_retc( TTF_FontFaceFamilyName(font) );
+      hb_retc( TTF_FontFaceFamilyName( font ) );
    }
    else
    {
@@ -358,7 +359,7 @@ HB_FUNC( TTF_FONTFACESTYLENAME )
 
    if( font )
    {
-      hb_retc( TTF_FontFaceStyleName(font) );
+      hb_retc( TTF_FontFaceStyleName( font ) );
    }
    else
    {
@@ -373,7 +374,7 @@ HB_FUNC( TTF_GLYPHISPROVIDED )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      hb_retni( TTF_GlyphIsProvided(font, (Uint16)hb_parni(2) ) );
+      hb_retni( TTF_GlyphIsProvided(font, ( Uint16 ) hb_parni( 2 ) ) );
    }
    else
    {
@@ -388,7 +389,7 @@ HB_FUNC( TTF_GLYPHISPROVIDED32 )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      hb_retni( TTF_GlyphIsProvided32(font, (Uint32)hb_parni(2) ) );
+      hb_retni( TTF_GlyphIsProvided32( font, ( Uint32 ) hb_parni( 2 ) ) );
    }
    else
    {
