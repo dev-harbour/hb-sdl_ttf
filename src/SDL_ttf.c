@@ -109,6 +109,19 @@ HB_FUNC( TTF_SETFONTSIZE )
 }
 
 // extern DECLSPEC int SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi);
+HB_FUNC( TTF_SETFONTSIZEDPI )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_INTEGER ) != NULL && hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      TTF_SetFontSizeDPI(font, hb_parni(2), hb_parni(3), hb_parni(4) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC int SDLCALL TTF_GetFontStyle(const TTF_Font *font);
 HB_FUNC( TTF_GETFONTSTYLE )
@@ -216,12 +229,112 @@ HB_FUNC( TTF_FONTHEIGHT )
 }
 
 // extern DECLSPEC int SDLCALL TTF_FontAscent(const TTF_Font *font);
+HB_FUNC( TTF_FONTASCENT )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retni( TTF_FontAscent(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_FontDescent(const TTF_Font *font);
+HB_FUNC( TTF_FONTDESCENT )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retni( TTF_FontDescent(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_FontLineSkip(const TTF_Font *font);
+HB_FUNC( TTF_FONTLINESKIP )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retni( TTF_FontLineSkip(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_GetFontKerning(const TTF_Font *font);
+HB_FUNC( TTF_GETFONTKERNING )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retni( TTF_GetFontKerning(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, int allowed);
+HB_FUNC( TTF_SETFONTKERNING )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
+   {
+      int kerning = hb_parni(2);
+      if (kerning == 0 || kerning == 1)
+      {
+         TTF_SetFontKerning( font, kerning );
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC long SDLCALL TTF_FontFaces(const TTF_Font *font);
+HB_FUNC( TTF_FONTFACES )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retnl( TTF_FontFaces(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_FontFaceIsFixedWidth(const TTF_Font *font);
+HB_FUNC( TTF_FONTFACEISFIXEDWIDTH )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font )
+   {
+      hb_retni( TTF_FontFaceIsFixedWidth(font) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC char * SDLCALL TTF_FontFaceFamilyName(const TTF_Font *font);
 HB_FUNC( TTF_FONTFACEFAMILYNAME )
@@ -254,7 +367,35 @@ HB_FUNC( TTF_FONTFACESTYLENAME )
 }
 
 // extern DECLSPEC int SDLCALL TTF_GlyphIsProvided(TTF_Font *font, Uint16 ch);
+HB_FUNC( TTF_GLYPHISPROVIDED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
+   {
+      hb_retni( TTF_GlyphIsProvided(font, (Uint16)hb_parni(2) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_GlyphIsProvided32(TTF_Font *font, Uint32 ch);
+HB_FUNC( TTF_GLYPHISPROVIDED32 )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
+   {
+      hb_retni( TTF_GlyphIsProvided32(font, (Uint32)hb_parni(2) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance);
 // extern DECLSPEC int SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance);
 // extern DECLSPEC int SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h);
@@ -466,8 +607,8 @@ HB_FUNC( TTF_QUIT )
 {
 	TTF_Quit();
 }
-// extern DECLSPEC int SDLCALL TTF_WasInit(void);
 
+// extern DECLSPEC int SDLCALL TTF_WasInit(void);
 HB_FUNC( TTF_WASINIT )
 {
 	hb_retni( TTF_WasInit() );
