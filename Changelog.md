@@ -8,6 +8,18 @@
 
 ## 2022-01-26
 
+### Changed
+   - TTF_SetFontSizeDPI()
+   - TTF_FontAscent()
+   - TTF_FontDescent()
+   - TTF_FontLineSkip()
+   - TTF_GetFontKerning()
+   - TTF_SetFontKerning()
+   - TTF_FontFaces()
+   - TTF_FontFaceIsFixedWidth()
+   - TTF_GlyphIsProvided()
+   - TTF_GlyphIsProvided32()
+
 ### Added
 
    - hb-sdl_ttf/examples/fonts/LinLibertine_R.ttf
