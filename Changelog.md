@@ -6,6 +6,35 @@
 
 # Changelog hb-sdl_ttf
 
+## 2022-01-28
+
+### Update
+   - hb-sdl_ttf/src/SDL_ttf.c
+
+### Changed
+   - TTF_OpenFontDPI()
+   - TTF_OpenFontIndexDPI()
+   - TTF_OpenFontDPIRW()
+   - TTF_OpenFontIndexDPIRW()
+   - TTF_SizeUNICODE()
+   - TTF_RenderUNICODE_Solid()
+   - TTF_RenderText_Solid_Wrapped()
+   - TTF_RenderUTF8_Solid_Wrapped()
+   - TTF_RenderUNICODE_Solid_Wrapped()
+   - TTF_RenderGlyph_Solid()
+   - TTF_RenderGlyph32_Solid()
+   - TTF_RenderUNICODE_Shaded()
+   - TTF_RenderText_Shaded_Wrapped()
+   - TTF_RenderUTF8_Shaded_Wrapped()
+   - TTF_RenderUNICODE_Shaded_Wrapped()
+   - TTF_RenderGlyph_Shaded()
+   - TTF_RenderGlyph32_Shaded()
+   - TTF_RenderUNICODE_Blended()
+   - TTF_RenderText_Blended_Wrapped()
+   - TTF_RenderUTF8_Blended_Wrapped()
+   - TTF_RenderUNICODE_Blended_Wrapped()
+   - TTF_RenderGlyph32_Blended()
+
 ## 2022-01-27
 
 ### Update

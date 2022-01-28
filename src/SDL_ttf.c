@@ -93,6 +93,25 @@ HB_FUNC( TTF_GETHARFBUZZVERSION )
 }
 
 // extern DECLSPEC void SDLCALL TTF_ByteSwappedUNICODE(SDL_bool swapped);
+HB_FUNC( TTF_BYTESWAPPEDUNICODE )
+{
+   if( hb_param( 1, HB_IT_INTEGER ) != NULL )
+   {
+      if( hb_parni( 1 ) == UNICODE_BOM_NATIVE || hb_parni( 1 ) == UNICODE_BOM_SWAPPED )
+      {
+         TTF_ByteSwappedUNICODE( hb_parni( 1 ) );
+      }
+      else
+      {
+         HB_ERR_ARGS();
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+
+}
 
 // extern DECLSPEC int SDLCALL TTF_Init(void);
 HB_FUNC( TTF_INIT )
@@ -119,7 +138,7 @@ HB_FUNC( TTF_OPENFONTINDEX )
 {
    if( hb_param( 1, HB_IT_STRING ) != NULL &&
        hb_param( 2, HB_IT_INTEGER ) != NULL &&
-       hb_param( 3, HB_IT_INTEGER ) != NULL )
+       hb_param( 3, HB_IT_NUMERIC ) != NULL )
    {
       hb_font_Return( TTF_OpenFontIndex( hb_parc( 1 ), hb_parni( 2 ), ( long ) hb_parni(3) ) );
    }
@@ -130,13 +149,103 @@ HB_FUNC( TTF_OPENFONTINDEX )
 }
 
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontRW(SDL_RWops *src, int freesrc, int ptsize);
+HB_FUNC( TTF_OPENFONTRW )
+{
+   if( hb_param( 1, HB_IT_POINTER ) != NULL &&
+       hb_param( 2, HB_IT_INTEGER ) != NULL &&
+       hb_param( 3, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontRW( hb_parptr( 1 ), hb_parni( 2 ),  hb_parni(3) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexRW(SDL_RWops *src, int freesrc, int ptsize, long index);
+HB_FUNC( TTF_OPENFONTINDEXRW )
+{
+   if( hb_param( 1, HB_IT_POINTER ) != NULL &&
+       hb_param( 2, HB_IT_INTEGER ) != NULL &&
+       hb_param( 3, HB_IT_INTEGER ) != NULL &&
+       hb_param( 4, HB_IT_NUMERIC ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontIndexRW( hb_parptr( 1 ), hb_parni( 2 ),  hb_parni(3), ( long ) hb_parni(4) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontDPI(const char *file, int ptsize, unsigned int hdpi, unsigned int vdpi);
+HB_FUNC( TTF_OPENFONTDPI )
+{
+   if( hb_param( 1, HB_IT_STRING ) != NULL && 
+       hb_param( 2, HB_IT_INTEGER ) != NULL && 
+       hb_param( 3, HB_IT_INTEGER ) != NULL && 
+       hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontDPI( hb_parc( 1 ), hb_parni( 2 ), ( unsigned ) hb_parni( 3 ), ( unsigned ) hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexDPI(const char *file, int ptsize, long index, unsigned int hdpi, unsigned int vdpi);
+HB_FUNC( TTF_OPENFONTINDEXDPI )
+{
+   if( hb_param( 1, HB_IT_STRING ) != NULL && 
+       hb_param( 2, HB_IT_INTEGER ) != NULL && 
+       hb_param( 3, HB_IT_INTEGER ) != NULL && 
+       hb_param( 4, HB_IT_INTEGER ) != NULL && 
+       hb_param( 5, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontIndexDPI( hb_parc( 1 ), hb_parni( 2 ), ( long ) hb_parni( 3 ), ( unsigned ) hb_parni( 4 ), ( unsigned ) hb_parni( 5 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontDPIRW(SDL_RWops *src, int freesrc, int ptsize, unsigned int hdpi, unsigned int vdpi);
+HB_FUNC( TTF_OPENFONTDPIRW )
+{
+   if( hb_param( 1, HB_IT_POINTER ) != NULL && 
+       hb_param( 2, HB_IT_INTEGER ) != NULL && 
+       hb_param( 3, HB_IT_INTEGER ) != NULL && 
+       hb_param( 4, HB_IT_INTEGER ) != NULL && 
+       hb_param( 5, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontDPIRW( hb_parptr( 1 ), hb_parni( 2 ), hb_parni( 3 ), ( unsigned ) hb_parni( 4 ), ( unsigned ) hb_parni( 5 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIndexDPIRW(SDL_RWops *src, int freesrc, int ptsize, long index, unsigned int hdpi, unsigned int vdpi);
+HB_FUNC( TTF_OPENFONTINDEXDPIRW )
+{
+   if( hb_param( 1, HB_IT_POINTER ) != NULL && 
+       hb_param( 2, HB_IT_INTEGER ) != NULL && 
+       hb_param( 3, HB_IT_INTEGER ) != NULL && 
+       hb_param( 4, HB_IT_NUMERIC ) != NULL && 
+       hb_param( 5, HB_IT_INTEGER ) != NULL && 
+       hb_param( 6, HB_IT_INTEGER ) != NULL )
+   {
+      hb_font_Return( TTF_OpenFontIndexDPIRW( hb_parptr( 1 ), hb_parni( 2 ), hb_parni( 3 ), ( long ) hb_parni( 4 ), ( unsigned ) hb_parni( 5 ), ( unsigned ) hb_parni( 6 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC int SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize);
 HB_FUNC( TTF_SETFONTSIZE )
@@ -145,7 +254,7 @@ HB_FUNC( TTF_SETFONTSIZE )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontSize( font, hb_parni( 2 ) );
+      hb_retni( TTF_SetFontSize( font, hb_parni( 2 ) ) );
    }
    else
    {
@@ -160,7 +269,7 @@ HB_FUNC( TTF_SETFONTSIZEDPI )
 
    if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_INTEGER ) != NULL && hb_param( 4, HB_IT_INTEGER ) != NULL )
    {
-      TTF_SetFontSizeDPI( font, hb_parni( 2 ), hb_parni ( 3 ), hb_parni( 4 ) );
+      hb_retni( TTF_SetFontSizeDPI( font, hb_parni( 2 ), ( unsigned ) hb_parni ( 3 ), ( unsigned ) hb_parni( 4 ) ) );
    }
    else
    {
@@ -453,17 +562,18 @@ HB_FUNC( TTF_GLYPHMETRICS )
       int miny;
       int maxy;
       int advance = 0;
-      if ( TTF_GlyphMetrics( font, ( Uint16 ) hb_parni( 1 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
+      if ( TTF_GlyphMetrics( font, ( Uint16 ) hb_parni( 2 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
       {
          hb_stornint( minx, 3 );
          hb_stornint( maxx, 4 );
          hb_stornint( miny, 5 );
          hb_stornint( maxy, 6 );
          hb_stornint( advance, 7 );
+         hb_retni( 0 );
       }
       else
       {
-         HB_ERR_ARGS();
+         hb_retnl( -1 );
       }
    }
    else
@@ -484,17 +594,18 @@ HB_FUNC( TTF_GLYPHMETRICS32 )
       int miny;
       int maxy;
       int advance = 0;
-      if ( TTF_GlyphMetrics32( font, ( Uint16 ) hb_parni( 1 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
+      if ( TTF_GlyphMetrics32( font, ( Uint32 ) hb_parni( 2 ), &minx, &maxx, &miny, &maxy, &advance ) == 0 )
       {
          hb_stornint( minx, 3 );
          hb_stornint( maxx, 4 );
          hb_stornint( miny, 5 );
          hb_stornint( maxy, 6 );
          hb_stornint( advance, 7 );
+         hb_retni( 0 );
       }
       else
       {
-         HB_ERR_ARGS();
+         hb_retnl( -1 );
       }
    }
    else
@@ -504,8 +615,82 @@ HB_FUNC( TTF_GLYPHMETRICS32 )
 }
 
 // extern DECLSPEC int SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h);
+HB_FUNC( TTF_SIZETEXT )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL && hb_param( 4, HB_IT_BYREF ) != NULL  )
+   {
+      int w;
+      int h;
+      if ( TTF_SizeText( font, hb_parc( 2 ), &w, &h ) == 0 )
+      {
+         hb_stornint( w, 3 );
+         hb_stornint( h, 4 );
+         hb_retni( 0 );
+      }
+      else
+      {
+         hb_retnl( -1 );
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h);
+HB_FUNC( TTF_SIZEUTF8 )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL && hb_param( 4, HB_IT_BYREF ) != NULL  )
+   {
+      int w;
+      int h;
+      if ( TTF_SizeUTF8( font, hb_parc( 2 ), &w, &h ) == 0 )
+      {
+         hb_stornint( w, 3 );
+         hb_stornint( h, 4 );
+         hb_retni( 0 );
+      }
+      else
+      {
+         hb_retnl( -1 );
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h);
+HB_FUNC( TTF_SIZEUNICODE )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL && hb_param( 3, HB_IT_BYREF ) != NULL && hb_param( 4, HB_IT_BYREF ) != NULL )
+   {
+      int w;
+      int h;
+      if( TTF_SizeUNICODE( font, ( Uint16 *) hb_parni( 2 ), &w, &h ) == 0 )
+      {
+         hb_stornint( w, 3 );
+         hb_stornint( h, 4 );
+         hb_retni( 0 );
+      }
+      else
+      {
+         hb_retni( -1 );
+      }
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_MeasureText(TTF_Font *font, const char *text, int measure_width, int *extent, int *count);
 // extern DECLSPEC int SDLCALL TTF_MeasureUTF8(TTF_Font *font, const char *text, int measure_width, int *extent, int *count);
 // extern DECLSPEC int SDLCALL TTF_MeasureUNICODE(TTF_Font *font, const Uint16 *text, int measure_width, int *extent, int *count);
@@ -559,11 +744,151 @@ HB_FUNC( TTF_RENDERUTF8_SOLID )
 }
 
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Solid(TTF_Font *font, const Uint16 *text, SDL_Color fg);
+HB_FUNC( TTF_RENDERUNICODE_SOLID )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Solid( font, ( Uint16 *) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERTEXT_SOLID_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderText_Solid_Wrapped( font, hb_parc( 2 ), fg, ( Uint32 ) hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUTF8_Solid_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUTF8_SOLID_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUTF8_Solid_Wrapped( font, hb_parc( 2 ), fg, ( Uint32 ) hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Solid_Wrapped(TTF_Font *font, const Uint16 *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUNICODE_SOLID_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Solid_Wrapped( font, ( Uint16 *) hb_parni( 2 ), fg, hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint16 ch, SDL_Color fg);
+HB_FUNC( TTF_RENDERGLYPH_SOLID )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph_Solid( font, ( Uint16 ) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph32_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg);
+HB_FUNC( TTF_RENDERGLYPH32_SOLID )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph32_Solid( font, ( Uint32 ) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, SDL_Color fg, SDL_Color bg);
 HB_FUNC( TTF_RENDERTEXT_SHADED )
@@ -628,11 +953,193 @@ HB_FUNC( TTF_RENDERUTF8_SHADED )
 }
 
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Shaded(TTF_Font *font, const Uint16 *text, SDL_Color fg, SDL_Color bg);
+HB_FUNC( TTF_RENDERUNICODE_SHADED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem ) == 4 ) &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Shaded( font, ( Uint16 *) hb_parni( 2 ), fg, bg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, SDL_Color bg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERTEXT_SHADED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem ) == 4 ) &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) &&
+     hb_param( 5, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderText_Shaded_Wrapped( font, hb_parc( 2 ), fg, bg, hb_parni( 5 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUTF8_Shaded_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, SDL_Color bg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUTF8_SHADED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem ) == 4 ) &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) &&
+     hb_param( 5, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderUTF8_Shaded_Wrapped( font, hb_parc( 2 ), fg, bg, hb_parni( 5 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Shaded_Wrapped(TTF_Font *font, const Uint16 *text, SDL_Color fg, SDL_Color bg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUNICODE_SHADED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem ) == 4 ) &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) &&
+     hb_param( 5, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Shaded_Wrapped( font, ( Uint16 *) hb_parni( 2 ), fg, bg, hb_parni( 5 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint16 ch, SDL_Color fg, SDL_Color bg);
+HB_FUNC( TTF_RENDERGLYPH_SHADED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph_Shaded( font, ( Uint16 ) hb_parni( 2 ), fg, bg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph32_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg);
+HB_FUNC( TTF_RENDERGLYPH32_SHADED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem, pItem2;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     ( pItem2 = hb_param( 4, HB_IT_ARRAY ) ) != NULL && ( hb_arrayLen( pItem2 ) == 4 ) )
+   {
+      SDL_Color fg;
+      SDL_Color bg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      bg.r = ( Uint8 ) hb_arrayGetNI( pItem2, 1 );
+      bg.g = ( Uint8 ) hb_arrayGetNI( pItem2, 2 );
+      bg.b = ( Uint8 ) hb_arrayGetNI( pItem2, 3 );
+      bg.a = ( Uint8 ) hb_arrayGetNI( pItem2, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph32_Shaded( font, ( Uint32 ) hb_parni( 2 ), fg, bg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
 
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, SDL_Color fg);
 HB_FUNC( TTF_RENDERTEXT_BLENDED )
@@ -683,11 +1190,152 @@ HB_FUNC( TTF_RENDERUTF8_BLENDED )
 }
 
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Blended(TTF_Font *font, const Uint16 *text, SDL_Color fg);
+HB_FUNC( TTF_RENDERUNICODE_BLENDED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Blended( font, ( Uint16 *) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERTEXT_BLENDED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderText_Blended_Wrapped( font, hb_parc( 2 ), fg, hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUTF8_Blended_Wrapped(TTF_Font *font, const char *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUTF8_BLENDED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_STRING ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUTF8_Blended_Wrapped( font, hb_parc( 2 ), fg, hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderUNICODE_Blended_Wrapped(TTF_Font *font, const Uint16 *text, SDL_Color fg, Uint32 wrapLength);
+HB_FUNC( TTF_RENDERUNICODE_BLENDED_WRAPPED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 &&
+     hb_param( 4, HB_IT_INTEGER ) != NULL )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderUNICODE_Blended_Wrapped( font, ( Uint16 *) hb_parni( 2 ), fg, hb_parni( 4 ) ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint16 ch, SDL_Color fg);
+HB_FUNC( TTF_RENDERGLYPH_BLENDED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph_Blended( font, ( Uint16 ) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph32_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg);
+HB_FUNC( TTF_RENDERGLYPH32_BLENDED )
+{
+   TTF_Font * font = hb_font_Param( 1 );
+   PHB_ITEM pItem;
+
+   if( font && hb_param( 2, HB_IT_INTEGER ) != NULL &&
+     ( pItem = hb_param( 3, HB_IT_ARRAY ) ) != NULL && hb_arrayLen( pItem ) == 4 )
+   {
+      SDL_Color fg;
+
+      fg.r = ( Uint8 ) hb_arrayGetNI( pItem, 1 );
+      fg.g = ( Uint8 ) hb_arrayGetNI( pItem, 2 );
+      fg.b = ( Uint8 ) hb_arrayGetNI( pItem, 3 );
+      fg.a = ( Uint8 ) hb_arrayGetNI( pItem, 4 );
+
+      hb_surface_Return( TTF_RenderGlyph32_Blended( font, ( Uint32 ) hb_parni( 2 ), fg ) );
+   }
+   else
+   {
+      HB_ERR_ARGS();
+   }
+}
+
 // extern DECLSPEC int SDLCALL TTF_SetDirection(int direction); /* hb_direction_t */
 // extern DECLSPEC int SDLCALL TTF_SetScript(int script); /* hb_script_t */
 
